@@ -1,0 +1,40 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+    <div class="single-contact">
+        <h1 class="single-contact-name">
+            {{ atores.primeiro_nome }} {{ atores.segundo_nome }}
+        </h1>
+
+        <p><b>ID:</b> {{ atores.id }}</p>
+        <p><b>Personalidade:</b> {{ atores.personalidade }}</p>
+        <p><b>Idade:</b> {{ atores.idade }}</p>
+
+        {% if atores.imagem %}
+            <p>
+                <img src="{{ atores.imagem.url }}" alt="{{ atores.primeiro_nome }} {{ ator.segundo_nome }}">
+            </p>
+        {% endif %}
+
+        <div class="contact-links">
+            <a class="btn btn-link" href="{% url 'update' atores.id %}">Update</a>
+            
+            {% if atores.link_videos %}
+                <div class="contact-links">
+                    <a class="btn btn-link" href="{{ atores.link_videos }}">Ver vídeo</a>
+                </div>
+            {% endif %}
+
+            <form action="{% url 'delete' atores.id %}" method="POST">
+                {% csrf_token %}
+
+                {% if confirmation == 'no' %}
+                    <input type="hidden" name="confirmation" value="yes">
+                    <button class="btn btn-link btn-delete" type="submit">Confirma?</button>
+                {% else %}
+                    <button class="btn btn-link btn-delete" type="submit">Delete</button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+{% endblock content %}

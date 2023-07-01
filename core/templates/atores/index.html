@@ -1,0 +1,64 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+    {% if atores %}
+        <div class="responsive-table">
+            <table class="contacts-table">
+                <caption class="table-caption">
+                    Atores
+                </caption>
+
+                <thead>
+                    <tr class="table-row table-row-header">
+                        <th class="table-header">ID</th>
+                        <th class="table-header">Primeiro Nome</th>
+                        <th class="table-header">Segundo Nome</th>
+                        <th class="table-header">Personalidade</th>
+                        <th class="table-header">Idade</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for ator in atores %}
+                        <tr class="table-row">
+                            <td class="table-cel">
+                                <a 
+                                class="table-link"
+                                href="{% url 'detalhes' ator.id %}"
+                                >
+                                    {{ ator.id }}
+                                </a>
+                            </td>
+                            <td class="table-cel">
+                                <a class="table-link" href="#">
+                                    {{ ator.primeiro_nome }}
+                                </a>
+                            </td>
+                            <td class="table-cel">
+                                <a class="table-link" href="#">
+                                    {{ ator.segundo_nome }}
+                                </a>
+                            </td>
+                            <td class="table-cel">
+                                <a class="table-link" href="#">
+                                    {{ ator.personalidade }}
+                                </a>
+                            </td>
+                            <td class="table-cel">
+                                <a class="table-link" href="#">
+                                    {{ ator.idade }}
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+    <div class="single-contact">
+        <h1 class="single-contact-name">
+            Nada foi encontrado!
+        </h1>
+    </div>
+    {% endif %}
+{% endblock content %}
